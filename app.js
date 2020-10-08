@@ -1,16 +1,36 @@
+const body = document.querySelector("body");
 const container = document.querySelector("main");
 
-container.style.display = "grid"
-container.style.gridTemplateColumns = "repeat(16 , 30px)"
-container.style.gridTemplateRows = "repeat(16 , 30px)"
+
+createGrid(16, 16)
 
 
-const gridCells = container.children
+const button = document.createElement('button');
+button.textContent = "Reset"
+button.addEventListener('click', () => {
+    let newSize = prompt("Enter new size");
+    console.log(newSize)
+    createGrid(newSize , newSize)
+})
+body.appendChild(button)
 
 
-for (let i = 0; i < 256; i++) {
-    const newDiv = document.createElement('div');
-    newDiv.textContent = "Div"
-    newDiv.classList.add("item")
-    container.appendChild(newDiv)
+function createGrid(width, height) {
+    container.style.display = "grid"
+    container.style.gridTemplateRows = `repeat(${width} , 30px)`
+    container.style.gridTemplateColumns = `repeat(${height} , 30px)`
+
+
+    for (let i = 0; i < (width * height); i++) {
+        const newDiv = document.createElement('div');
+        newDiv.style.borderStyle = "solid"
+        newDiv.style.borderWidth = "1px"
+        newDiv.style.borderColor = "black"
+        newDiv.addEventListener('mouseover', () => {
+            newDiv.classList.add("item")
+        })
+        container.appendChild(newDiv)
+    }
+
+
 }
